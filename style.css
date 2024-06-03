@@ -1,0 +1,189 @@
+h2{
+    font-family: Tahoma, sans-serif;
+    font-size: 28px;
+    color: #6C0345;
+}
+
+body {
+    font-family: Tahoma, sans-serif;
+    margin: 0;
+    padding: 0;
+
+}
+
+header {
+    background-color: #0C2D57;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+}
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 0 20px;
+}
+.item {
+    border-bottom: 5px solid #6C0345;
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.item div {
+    flex: 1; /* Set the width to occupy remaining space */
+}
+
+.item p {
+    text-align: left;
+    font-family: 'Tahoma', sans-serif; /* Change font family */
+    font-size: 24px; /* Change font size */
+    color:#cb5b00;
+    margin: 0;
+}
+
+.item input {
+    margin-bottom: 0.5PX;
+    width: 50px;
+}
+
+.item img {
+    max-width: 230px; /* Set maximum width to fill its container */
+    max-height: 564px; /* Set maximum height to ensure consistent height */
+    margin-right: 10px; /* Add some margin for spacing */
+    border-radius: 8px; /* Add border radius for rounded corners */
+}
+
+.category-buttons {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.category-button {
+    background-color: #6C0345;
+    border: none;
+    color: #ffffff;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    font-family: 'Tahoma';
+    margin-top: 10px;
+    cursor: pointer;
+    transition-duration: 0.4s;
+    border-radius: 8px;
+}
+
+.category-button:hover {
+    background-color: #FC6736;
+}
+.hidden {
+    display: none;
+}
+.logo {
+    max-width: 150px;
+    max-height: 150px; /* Adjust the max-width as needed */
+    margin-right: 10px; /* Add some margin for spacing */   
+} 
+
+.myQuantity {
+    margin-bottom: -100px; /* Adjust the top margin as needed */
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-family: ''Tahoma', sans-serif'; 
+}
+
+/* Styling for the input element */
+.myQuantity input[type="number"] {
+    width: 100px; /* Set the width of the input */
+    padding: 10px; /* Add padding for better appearance */
+    border: 5px solid #6C0345; /* Add a border */
+    border-radius: 5px; /* Add border radius for rounded corners */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    font-size: 22px; /* Adjust font size */
+    font-family: ''Tahoma', sans-serif'; 
+}
+
+/* Styling for the label */
+.myQuantity label {
+    margin-right: 10px; /* Add margin to separate the label from the input */
+    font-size: 22px; /* Adjust font size */
+    font-family: ''Tahoma', sans-serif'; 
+    color:#6C0345
+    
+}
+
+#purchaseBtn {
+    background-color: #f44336; /* Red background color */
+    color: white; /* White text color */
+    padding: 10px 20px; /* Padding around the text */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    font-family: 'Trebuchet MS';
+    font-weight: bold;
+    font-size: 16px; /* Font size */
+    cursor: pointer; /* Cursor style */
+    transition-duration: 0.4s; /* Smooth transition effect */
+}
+
+#purchaseBtn:hover {
+    background-color: #6C0345; /* Darker red color on hover */
+}
+
+#cancelBtn{
+    background-color: #f44336; /* Red background color */
+    color: white; /* White text color */
+    padding: 10px 20px; /* Padding around the text */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    font-family: 'Trebuchet MS';
+    font-weight: bold;
+    font-size: 16px; /* Font size */
+    cursor: pointer; /* Cursor style */
+    transition-duration: 0.4s; /* Smooth transition effect */
+}
+
+#cancelBtn:hover{
+    background-color: #6C0345; /
+}
+
+#displayReceiptBtn{
+    background-color: #f44336; /* Red background color */
+    color: white; /* White text color */
+    padding: 10px 20px; /* Padding around the text */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    font-family: 'Trebuchet MS';
+    font-weight: bold;
+    font-size: 16px; /* Font size */
+    cursor: pointer; /* Cursor style */
+    transition-duration: 0.4s; /* Smooth transition effect */
+}
+
+#displayReceiptBtn:hover{
+    background-color: #6C0345; /
+}
+
+#total {
+font-size: 24px;
+font-weight: bold;
+color: #ffffff; /* Change color to your preference */
+margin-top: px; /* Adjust margin as needed */
+}   
+
+footer {
+    background-color: #113366;
+    color: #01f4ec;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+footer p#total-text {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ffffff; /* Adjust color as needed */
+    margin-bottom: 5px; /* Adjust margin as needed */
+}
