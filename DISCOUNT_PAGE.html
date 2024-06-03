@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SWAVY HAVEN DISCOUNT</title>
+    <style>
+        body {
+            font-family: Tahoma, sans-serif;
+            background-color: #ffffff;
+            margin: 0;
+            padding: 20px;
+            font-weight: bold;
+        }
+
+        .container {
+            font-family: Tahoma, sans-serif;
+            max-width: 600px;
+            margin: auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            font-weight: bold;
+        }
+
+        h1 {
+            font-family: Tahoma, sans-serif;
+            text-align: center;
+            color: #0C2D57;
+            font-weight: bold;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        label {
+            font-family: Tahoma, sans-serif;
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #0C2D57;
+            font-weight: bold;
+        }
+
+        select, input[type="number"], input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-weight: bold;
+        }
+
+        button {
+            font-family: Tahoma, sans-serif;
+            background-color: #6C0345;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: bold;
+        }
+        
+        button:hover {
+            background-color: #FC6736;
+        }
+
+        .result {
+            margin-top: 20px;
+        }
+
+
+        footer {
+            font-family: Tahoma, sans-serif;
+            background-color: #0C2D57;
+            color: #FC6736;
+            padding: 20px;
+            text-align: center;
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+        }
+
+        footer button {
+            background-color: #6C0345;
+            font-weight: bold;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-left: auto;
+        }
+
+        footer button:hover {
+            background-color: #FC6736;
+        }
+
+        footer .restock-btn {
+            background-color: #6C0345; /* Red background color */
+            color: white; /* White text color */
+            padding: 10px 20px;
+            margin-bottom: 20px;/* Padding around the text */
+            border: none; /* No border */
+            border-radius: 5px; /* Rounded corners */
+            font-family: Tahoma, sans-serif;
+            font-weight: bold;
+            font-size: 16px; /* Font size */
+            cursor: pointer; /* Cursor style */
+            transition-duration: 0.4s; /* Smooth transition effect */
+        }
+
+        footer .restock-btn:hover {
+            background-color: #FC6736;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>SWAVY HAVEN DISCOUNT</h1>
+
+        <form id="checkoutForm">
+            <label for="category">Category:</label>
+            <select id="category" onchange="populateItems()">
+                <option value="jeans">Jeans</option>
+                <option value="tshirt">T-shirt</option>
+                <option value="perfume">Perfume</option>
+                <option value="sando">Sando</option>
+                <option value="toys">Toys</option>
+            </select>
+
+            <label for="item">Item:</label>
+            <select id="item" onchange="updatePriceAndStock()">
+                <!-- Items will be populated dynamically -->
+            </select>
+
+            <label for="quantity">Quantity:</label>
+            <input type="number" id="quantity" min="1" value="1" oninput="updatePriceAndStock()">
+
+            <label for="price">Price:</label>
+            <input type="text" id="price" readonly>
+
+            <label for="stock">Stock:</label>
+            <input type="text" id="stock" readonly>
+
+            <label for="discount">Apply Discount:</label>
+            <select id="discount">
+                <option value="none">No Discount</option>
+                <option value="senior">Senior (20% off)</option>
+                <option value="pwd">PWD (30% off)</option>
+                <option value="student">Student (10% off)</option>
+            </select>
+
+            <button type="button" onclick="calculateFinalPrice()">Calculate Final Price</button>
+
+            <div class="result">
+                <label for="finalPrice">Final Price:</label>
+                <input type="text" id="finalPrice" readonly>
+            </div>
+
+            <button type="button" onclick="checkout()">Checkout</button>
+        </form>
+    </div>
+
+    <script>
+        // Sample item data for each category
+        var itemData = {
+            jeans: ["Unisex Pleat Front Wide Leg Jeans", "Unisex Slant Pocket Loose Jeans", "Cinessd Dark Blue Womens Jeans High Waist Vintage Straight Baggy Denim", "Unisex X Jeans Blue", "Unisex Denim Trouser Cargo Jeans"],
+            tshirt: ["Burgundy Red Collar Short Sleeve Fabric", "Burgundy Brown Collar Short Sleeve Fabric", "Landon I Collar Short Sleeve Fabric", "Landon II Collar Short Sleeve Fabric", "Landon I White Short Sleeve Fabric"],
+            perfume: ["Bleu De Chanel", "Versace", "Dolce Garbana", "Auvage Dior", "Valentino"],
+            sando: ["Swavy Haven Tank Top Men White", "Swavy Haven Tank Top Men Gray", "Swavy Haven Tank Top Men Black", "Swavy Haven Tank Top Women White","Swavy Haven Tank Top Women Mabo"],
+            toys: ["Black Lamborghini 12V Exclusive for Kids", "Red Lamborghini 12V Exclusive for Kids", "Blue Lamborghini 12V Exclusive for Kids", "Pink Porsche 6V Exclusive for Kids", "Pink Lexus 8v Exclusive for Kids"]
+        };
+
+        // Sample item prices
+        var itemPrices = {
+            "Unisex Pleat Front Wide Leg Jeans": 49,
+            "Unisex Slant Pocket Loose Jeans": 49,
+            "Cinessd Dark Blue Womens Jeans High Waist Vintage Straight Baggy Denim": 39,
+            "Unisex X Jeans Blue": 30,
+            "Unisex Denim Trouser Cargo Jeans": 59,
+            //Sando
+            "Burgundy Red Collar Short Sleeve Fabric": 29,
+            "Burgundy Brown Collar Short Sleeve Fabric": 29,
+            "Landon I Collar Short Sleeve Fabric": 39,
+            "Landon II Collar Short Sleeve Fabric": 49,
+            "Landon I White Short Sleeve Fabric": 29,
+            //Perfume
+            "Bleu De Chanel": 39,
+            "Versace": 39,
+            "Dolce Garbana": 29,
+            "Auvage Dior": 29,
+            "Valentino": 29,
+            //Sando
+            "Swavy Haven Tank Top Men White": 39,
+            "Swavy Haven Tank Top Men Gray": 39,
+            "Swavy Haven Tank Top Men Black": 39,
+            "Swavy Haven Tank Top Women White": 39,
+            "Swavy Haven Tank Top Women Mabo": 39,
+            //Toys
+            "Black Lamborghini 12V Exclusive for Kids": 239,
+            "Red Lamborghini 12V Exclusive for Kids": 239,
+            "Blue Lamborghini 12V Exclusive for Kids": 239,
+            "Pink Porsche 6V Exclusive for Kids": 229,
+            "Pink Lexus 8v Exclusive for Kids": 229,
+        };
+
+        // Sample stock data for each item
+        var itemStocks = {
+            "Unisex Pleat Front Wide Leg Jeans": 1634,
+            "Unisex Slant Pocket Loose Jeans": 1125,
+            "Cinessd Dark Blue Womens Jeans High Waist Vintage Straight Baggy Denim": 1835,
+            "Unisex X Jeans Blue": 2545,
+            "Unisex Denim Trouser Cargo Jeans": 2574,
+            //Sando
+            "Burgundy Red Collar Short Sleeve Fabric": 324,
+            "Burgundy Brown Collar Short Sleeve Fabric": 521,
+            "Landon I Collar Short Sleeve Fabric": 213,
+            "Landon II Collar Short Sleeve Fabric": 612,
+            "Landon I White Short Sleeve Fabric": 124,
+            //Perfume
+            "Bleu De Chanel": 342,
+            "Versace": 212,
+            "Dolce Garbana": 723,
+            "Auvage Dior": 854,
+            "Valentino": 1023,
+            //Sando
+            "Swavy Haven Tank Top Men White": 92,
+            "Swavy Haven Tank Top Men Gray": 213,
+            "Swavy Haven Tank Top Men Black": 103,
+            "Swavy Haven Tank Top Women White": 93,
+            "Swavy Haven Tank Top Women Mabo": 149,
+            //Toys
+            "Black Lamborghini 12V Exclusive for Kids": 10,
+            "Red Lamborghini 12V Exclusive for Kids": 13,
+            "Blue Lamborghini 12V Exclusive for Kids": 15,
+            "Pink Porsche 6V Exclusive for Kids": 12,
+            "Pink Lexus 8v Exclusive for Kids": 15,
+        };
+
+        // Function to populate items based on selected category
+        function populateItems() {
+            var category = document.getElementById("category").value;
+            var items = itemData[category];
+            var itemDropdown = document.getElementById("item");
+            itemDropdown.innerHTML = ""; // Clear existing options
+
+            items.forEach(function(item) {
+                var option = document.createElement("option");
+                option.text = item;
+                itemDropdown.add(option);
+            });
+
+            // Update price and stock for the first item in the list
+            updatePriceAndStock();
+        }
+
+        // Function to update price and stock based on selected item and quantity
+        function updatePriceAndStock() {
+            var selectedItem = document.getElementById("item").value;
+            var quantity = parseInt(document.getElementById("quantity").value);
+            var itemPrice = itemPrices[selectedItem];
+            var totalPrice = itemPrice * quantity;
+            document.getElementById("price").value = "$" + totalPrice.toFixed(2);
+
+            // Update stock
+            var itemStock = itemStocks[selectedItem];
+            document.getElementById("stock").value = itemStock;
+        }
+
+        // Function to calculate final price after applying discount
+        function calculateFinalPrice() {
+            var totalPrice = parseFloat(document.getElementById("price").value.replace('$', ''));
+            var discount = document.getElementById("discount").value;
+            var finalPrice;
+
+            switch(discount) {
+                case "senior":
+                    finalPrice = totalPrice * 0.8;
+                    break;
+                case "pwd":
+                    finalPrice = totalPrice * 0.7;
+                    break;
+                case "student":
+                    finalPrice = totalPrice * 0.9;
+                    break;
+                default:
+                    finalPrice = totalPrice;
+            }
+
+            document.getElementById("finalPrice").value = "$" + finalPrice.toFixed(2);
+        }
+
+        // Function to handle checkout
+        function checkout() {
+    var selectedItem = document.getElementById("item").value;
+    var quantity = parseInt(document.getElementById("quantity").value);
+    var itemPrice = itemPrices[selectedItem];
+    var totalPrice = itemPrice * quantity;
+    var discount = document.getElementById("discount").value;
+    var finalPrice;
+
+    if (isNaN(totalPrice)) {
+        alert("Please enter a valid quantity.");
+        return;
+    }
+
+    switch(discount) {
+        case "senior":
+            finalPrice = totalPrice * 0.8;
+            break;
+        case "pwd":
+            finalPrice = totalPrice * 0.7;
+            break;
+        case "student":
+            finalPrice = totalPrice * 0.9;
+            break;
+        default:
+            finalPrice = totalPrice;
+    }
+
+    var currentStock = parseInt(itemStocks[selectedItem]);
+    if (currentStock >= quantity) {
+        // Reduce stock
+        itemStocks[selectedItem] -= quantity;
+        updatePriceAndStock(); // Update displayed stock
+        document.getElementById("finalPrice").value = "$" + finalPrice.toFixed(2);
+        alert("Thank you for your purchase! Your total amount is: $" + finalPrice.toFixed(2));
+    } else {
+        alert("Insufficient stock. Please restock before checkout.");
+    }
+}
+
+        // Function to restock items
+        function restock() {
+            var selectedItem = document.getElementById("item").value;
+            var currentStock = parseInt(itemStocks[selectedItem]);
+            var additionalStock = parseInt(prompt("Enter additional stock for " + selectedItem + ":"));
+
+            if (!isNaN(additionalStock) && additionalStock > 0) {
+                itemStocks[selectedItem] = currentStock + additionalStock;
+                updatePriceAndStock(); // Update displayed stock
+                alert("Stock for " + selectedItem + " has been updated.");
+            } else {
+                alert("Please enter a valid number for additional stock.");
+            }
+        }
+
+        // Populate items initially on page load
+        populateItems();
+
+        function navigateToPage() {
+            // Replace 'path/to/your/page.html' with the actual path to your local file
+            window.location.href = 'SWAVY_HAVEN.html';
+        }
+
+    </script>
+
+    
+
+<footer>
+    <div class="container">
+        <!-- Other footer content here -->
+        <button class="restock-btn" onclick="restock()">Restock</button>
+        <button onclick="navigateToPage()">Go to Main Store</button>
+    </div>
+</footer>
+
+
+
+</body>
+</html>

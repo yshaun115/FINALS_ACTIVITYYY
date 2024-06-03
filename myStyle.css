@@ -1,0 +1,54 @@
+
+Body{
+	Background-color: white;
+}
+P{
+	Text-align: center;
+	Color: darkred;
+	Font-family:”Arial”;
+}
+H1{
+	Font-family: “Arial”;
+	Color: darkred;
+	Font-weight: bolder;
+	Text-align: center;
+
+}
+H2{
+	Font-family: “Arial”;
+	Text-align: center;
+}
+Caption{
+	Font-family:”Arial”;
+	Background-color:darkred;
+	Color: white;
+	Text-align:center;	
+	Font-weight: bold;
+}
+Td{
+	Font-family:”Arial”;
+	Font-size:15px;
+}
+
+.heading {
+	text-align: center;
+	color: maroon;
+}
+#SY {
+	text-align: center;
+}
+
+#myRow {
+	font-style: bold;
+}
+
+.FINALDIVISION{
+	border-collapse:collapse;
+	border:1px solid;
+	border-color: maroon;
+	width: 90%;
+	margin-left: auto;
+	margin-right: auto;
+	Background-color: LIGHTYELLOW;
+
+}

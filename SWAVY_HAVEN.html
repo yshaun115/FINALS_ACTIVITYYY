@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sari Sari Store</title>
+<style>
+
+    h2{
+        font-family: Tahoma, sans-serif;
+        font-size: 28px;
+        color: #6C0345;
+    }
+
+    body {
+        font-family: Tahoma, sans-serif;
+        margin: 0;
+        padding: 0;
+
+    }
+
+    header {
+        background-color: #0C2D57;
+        color: #fff;
+        padding: 10px;
+        text-align: center;
+    }
+    .container {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 0 20px;
+    }
+    .item {
+        border-bottom: 5px solid #6C0345;
+        padding: 10px 0;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .item div {
+        flex: 1; /* Set the width to occupy remaining space */
+    }
+
+    .item p {
+        text-align: left;
+        font-family: 'Tahoma', sans-serif; /* Change font family */
+        font-size: 24px; /* Change font size */
+        color:#cb5b00;
+        margin: 0;
+    }
+
+    .item input {
+        margin-bottom: 0.5PX;
+        width: 50px;
+    }
+    
+    .item img {
+        max-width: 230px; /* Set maximum width to fill its container */
+        max-height: 564px; /* Set maximum height to ensure consistent height */
+        margin-right: 10px; /* Add some margin for spacing */
+        border-radius: 8px; /* Add border radius for rounded corners */
+    }
+
+    .category-buttons {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    .category-button {
+        background-color: #6C0345;
+        border: none;
+        color: #ffffff;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 20px;
+        font-family: 'Tahoma';
+        margin-top: 10px;
+        cursor: pointer;
+        transition-duration: 0.4s;
+        border-radius: 8px;
+    }
+
+    .category-button:hover {
+        background-color: #FC6736;
+    }
+    .hidden {
+        display: none;
+    }
+    .logo {
+        max-width: 150px;
+        max-height: 150px; /* Adjust the max-width as needed */
+        margin-right: 10px; /* Add some margin for spacing */   
+    } 
+    
+    .myQuantity {
+        margin-bottom: -100px; /* Adjust the top margin as needed */
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        font-family: ''Tahoma', sans-serif'; 
+    }
+
+    /* Styling for the input element */
+    .myQuantity input[type="number"] {
+        width: 100px; /* Set the width of the input */
+        padding: 10px; /* Add padding for better appearance */
+        border: 5px solid #6C0345; /* Add a border */
+        border-radius: 5px; /* Add border radius for rounded corners */
+        box-sizing: border-box; /* Include padding and border in the element's total width and height */
+        font-size: 22px; /* Adjust font size */
+        font-family: ''Tahoma', sans-serif'; 
+    }
+
+    /* Styling for the label */
+    .myQuantity label {
+        margin-right: 10px; /* Add margin to separate the label from the input */
+        font-size: 22px; /* Adjust font size */
+        font-family: ''Tahoma', sans-serif'; 
+        color:#6C0345
+        
+    }
+
+    #purchaseBtn {
+        background-color: #f44336; /* Red background color */
+        color: white; /* White text color */
+        padding: 10px 20px; /* Padding around the text */
+        border: none; /* No border */
+        border-radius: 5px; /* Rounded corners */
+        font-family: 'Trebuchet MS';
+        font-weight: bold;
+        font-size: 16px; /* Font size */
+        cursor: pointer; /* Cursor style */
+        transition-duration: 0.4s; /* Smooth transition effect */
+    }
+
+    #purchaseBtn:hover {
+        background-color: #6C0345; /* Darker red color on hover */
+    }
+
+    #cancelBtn{
+        background-color: #f44336; /* Red background color */
+        color: white; /* White text color */
+        padding: 10px 20px; /* Padding around the text */
+        border: none; /* No border */
+        border-radius: 5px; /* Rounded corners */
+        font-family: 'Trebuchet MS';
+        font-weight: bold;
+        font-size: 16px; /* Font size */
+        cursor: pointer; /* Cursor style */
+        transition-duration: 0.4s; /* Smooth transition effect */
+    }
+
+    #cancelBtn:hover{
+        background-color: #6C0345; /
+    }
+
+    #displayReceiptBtn{
+        background-color: #f44336; /* Red background color */
+        color: white; /* White text color */
+        padding: 10px 20px; /* Padding around the text */
+        border: none; /* No border */
+        border-radius: 5px; /* Rounded corners */
+        font-family: 'Trebuchet MS';
+        font-weight: bold;
+        font-size: 16px; /* Font size */
+        cursor: pointer; /* Cursor style */
+        transition-duration: 0.4s; /* Smooth transition effect */
+    }
+
+    #displayReceiptBtn:hover{
+        background-color: #6C0345; /
+    }
+
+    #navigateBtn{
+        background-color: #f44336; /* Red background color */
+        color: white; /* White text color */
+        padding: 10px 20px; /* Padding around the text */
+        border: none; /* No border */
+        border-radius: 5px; /* Rounded corners */
+        font-family: 'Trebuchet MS';
+        font-weight: bold;
+        font-size: 16px; /* Font size */
+        cursor: pointer; /* Cursor style */
+        transition-duration: 0.4s; /* Smooth transition effect */
+    }
+
+    #navigateBtn:hover{
+        background-color: #6C0345; /
+    }
+
+    #total {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ffffff; /* Change color to your preference */
+    margin-top: px; /* Adjust margin as needed */
+    }   
+
+    footer {
+        background-color: #113366;
+        color: #01f4ec;
+        text-align: center;
+        padding: 10px;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+    }
+
+    footer p#total-text {
+        font-size: 24px;
+        font-weight: bold;
+        color: #ffffff; /* Adjust color as needed */
+        margin-bottom: 5px; /* Adjust margin as needed */
+    }
+
+</style>
+</head>
+<body>
+
+<header>
+    <img src="logo.jpg" class="logo">
+    <h1>SWAVY HAVEN US</h1>
+</header>
+
+<div class="container" id="store">
+    <div class="category-buttons">
+        <button class="category-button" onclick="showCategory('Jeans')">Go to Jeans</button>
+        <button class="category-button" onclick="showCategory('T-shirt')">Go to T-shirt</button>
+        <button class="category-button" onclick="showCategory('Perfume')">Go to Perfume</button>
+        <button class="category-button" onclick="showCategory('Sando')">Go to Sando</button>
+        <button class="category-button" onclick="showCategory('Toys')">Go to Toys</button>
+    </div>
+
+<!--- JEANS--->
+    <div class="item-group" id="Jeans">
+        <div class="item" data-category="Jeans" data-stock="100">
+            <img src="jeans-3.jpg" alt="Jeans">
+            <div>
+                <h2>Unisex Pleat Front Wide Leg Jeans</h2>
+                <p>Price: $49.00 | Stock: <span id="stock1">1634</span></p>
+            </div>
+            <div class="myQuantity"> <!-- Updated class for styled input quantity -->
+                <label for="quantity">Quantity:</label> <!-- Added label for accessibility -->
+                <input type="number" id="quantity" min="0" max="stock1" value="0"> <!-- Added id for the input for label association -->
+            </div>
+        </div>
+    </div>
+
+    <div class="item-group" id="Jeans">
+        <div class="item" data-category="Jeans" data-stock="100">
+            <img src="jeans-1.jpg" alt="Jeans">
+            <div>
+                <h2>Unisex Slant Pocket Loose Jeans</h2>
+                <p>Price: $49.00 | Stock: <span id="stock1">1125</span></p>
+            </div>
+            <div class="myQuantity"> <!-- Updated class for styled input quantity -->
+                <label for="quantity">Quantity:</label> <!-- Added label for accessibility -->
+                <input type="number" id="quantity" min="0" max="stock1" value="0"> <!-- Added id for the input for label association -->
+            </div>
+        </div>
+    </div>
+
+    <div class="item-group" id="Jeans">
+        <div class="item" data-category="Jeans" data-stock="100">
+            <img src="jeans-2.jpg" alt="Jeans">
+            <div>
+                <h2>Cinessd Dark Blue Womens Jeans High Waist Vintage Straight Baggy Denim</h2>
+                <p>Price: $39.00 | Stock: <span id="stock1">1835</span></p>
+            </div>
+            <div class="myQuantity"> <!-- Updated class for styled input quantity -->
+                <label for="quantity">Quantity:</label> <!-- Added label for accessibility -->
+                <input type="number" id="quantity" min="0" max="stock1" value="0"> <!-- Added id for the input for label association -->
+            </div>
+        </div>
+    </div>
+
+    <div class="item-group" id="Jeans">
+        <div class="item" data-category="Jeans" data-stock="100">
+            <img src="jeans-4.jpg" alt="Jeans">
+            <div>
+                <h2>Unisex X Jeans Blue</h2>
+                <p>Price: $30.00 | Stock: <span id="stock1">2545</span></p>
+            </div>
+            <div class="myQuantity"> <!-- Updated class for styled input quantity -->
+                <label for="quantity">Quantity:</label> <!-- Added label for accessibility -->
+                <input type="number" id="quantity" min="0" max="stock1" value="0"> <!-- Added id for the input for label association -->
+            </div>
+        </div>
+    </div>
+
+    <div class="item-group" id="Jeans">
+        <div class="item" data-category="Jeans" data-stock="100">
+            <img src="jeans-5.jpg" alt="Jeans">
+            <div>
+                <h2>Unisex Denim Trouser Cargo Jeans</h2>
+                <p>Price: $59.00 | Stock: <span id="stock1">2574</span></p>
+            </div>
+            <div class="myQuantity"> <!-- Updated class for styled input quantity -->
+                <label for="quantity">Quantity:</label> <!-- Added label for accessibility -->
+                <input type="number" id="quantity" min="0" max="stock1" value="0"> <!-- Added id for the input for label association -->
+            </div>
+        </div>
+    </div>
+
+<!--- T-SHIRTS--->
+    <div class="item-group hidden" id="T-shirt">
+        <div class="item" data-category="T-shirt" data-stock="100">
+            <img src="T-shirt-1.jpg" alt="T-shirt">
+            <div>
+                <h2>Burgundy Red Collar Short Sleeve Fabric</h2>
+                <p>Price: $29.00 | Stock: <span id="stock2">324</span></p>
+            </div>
+            <div class="myQuantity"> <!-- Updated class for styled input quantity -->
+                <label for="quantity">Quantity:</label> <!-- Added label for accessibility -->
+                <input type="number" id="quantity" min="0" max="stock2" value="0"> <!-- Added id for the input for label association -->
+            </div>
+        </div>
+    </div>
+    
+    <div class="item-group hidden" id="T-shirt">
+        <div class="item" data-category="T-shirt" data-stock="100">
+            <img src="T-shirt-2.jpg" alt="T-shirt">
+            <div>
+                <h2>Burgundy Brown Collar Short Sleeve Fabric</h2>
+                <p>Price: $29.00 | Stock: <span id="stock3">521</span></p>
+            </div>
+            <div class="myQuantity"> <!-- Updated class for styled input quantity -->
+                <label for="quantity">Quantity:</label> <!-- Added label for accessibility -->
+                <input type="number" id="quantity" min="0" max="stock3" value="0"> <!-- Added id for the input for label association -->
+            </div>
+        </div>
+    </div>
+  
+    <div class="item-group hidden" id="T-shirt">
+        <div class="item" data-category="T-shirt" data-stock="100">
+            <img src="T-shirt-3.jpg" alt="T-shirt">
+            <div>
+                <h2>Landon I Collar Short Sleeve Fabric</h2>
+                <p>Price: $39.00 | Stock: <span id="stock4">213</span></p>
+            </div>
+            <div class="myQuantity"> <!-- Updated class for styled input quantity -->
+                <label for="quantity">Quantity:</label> <!-- Added label for accessibility -->
+                <input type="number" id="quantity" min="0" max="stock4" value="0"> <!-- Added id for the input for label association -->
+            </div>
+        </div>
+    </div>
+
+    <div class="item-group hidden" id="T-shirt">
+        <div class="item" data-category="T-shirt" data-stock="100">
+            <img src="T-shirt-4.jpg" alt="T-shirt">
+            <div>
+                <h2>Landon II Collar Short Sleeve Fabric</h2>
+                <p>Price: $49.00 | Stock: <span id="stock5">612</span></p>
+            </div>
+            <div class="myQuantity"> <!-- Updated class for styled input quantity -->
+                <label for="quantity">Quantity:</label> <!-- Added label for accessibility -->
+                <input type="number" id="quantity" min="0" max="stock5" value="0"> <!-- Added id for the input for label association -->
+            </div>
+        </div>
+    </div>
+    
+    <div class="item-group hidden" id="T-shirt">
+        <div class="item" data-category="T-shirt" data-stock="100">
+            <img src="T-shirt-5.jpg" alt="T-shirt">
+            <div>
+                <h2>Landon I White Short Sleeve Fabric</h2>
+                <p>Price: $29.00 | Stock: <span id="stock9">124</span></p>
+            </div>
+            <div class="myQuantity"> <!-- Updated class for styled input quantity -->
+                <label for="quantity">Quantity:</label> <!-- Added label for accessibility -->
+                <input type="number" id="quantity" min="0" max="stock9" value="0"> <!-- Added id for the input for label association -->
+            </div>
+        </div>
+    </div>
+   
+    
+<!--- PERFUMES--->
+    <div class="item-group hidden" id="Perfume">
+        <div class="item" data-category="Perfume" data-stock="80">
+            <img src="Perfume-1.jpg" alt="Perfume">
+            <div>
+                <h2>Bleu De Chanel</h2>
+                <p>Price: $39.00 | Stock: <span id="stock3">342</span></p>
+            </div>
+            <div class="myQuantity"> <!-- Updated class for styled input quantity -->
+                <label for="quantity">Quantity:</label> <!-- Added label for accessibility -->
+                <input type="number" id="quantity" min="0" max="stock3" value="0"> <!-- Added id for the input for label association -->
+            </div>
+        </div>
+    </div>
+
+    <div class="item-group hidden" id="Perfume">
+        <div class="item" data-category="Perfume" data-stock="80">
+            <img src="Perfume-2.jpg" alt="Perfume">
+            <div>
+                <h2>Versace</h2>
+                <p>Price: $39.00 | Stock: <span id="stock4">212</span></p>
+            </div>
+            <div class="myQuantity"> <!-- Updated class for styled input quantity -->
+                <label for="quantity">Quantity:</label> <!-- Added label for accessibility -->
+                <input type="number" id="quantity" min="0" max="stock4" value="0"> <!-- Added id for the input for label association -->
+            </div>
+        </div>
+    </div>
+
+    <div class="item-group hidden" id="Perfume">
+        <div class="item" data-category="Perfume" data-stock="80">
+            <img src="Perfume-3.jpg" alt="Perfume">
+            <div>
+                <h2>Dolce Garbana</h2>
+                <p>Price: $29.00 | Stock: <span id="stock5">723</span></p>
+            </div>
+            <div class="myQuantity"> <!-- Updated class for styled input quantity -->
+                <label for="quantity">Quantity:</label> <!-- Added label for accessibility -->
+                <input type="number" id="quantity" min="0" max="stock5" value="0"> <!-- Added id for the input for label association -->
+            </div>
+        </div>
+    </div>
+
+    <div class="item-group hidden" id="Perfume">
+        <div class="item" data-category="Perfume" data-stock="80">
+            <img src="Perfume-4.jpg" alt="Perfume">
+            <div>
+                <h2>Sauvage Dior</h2>
+                <p>Price: $29.00 | Stock: <span id="stock6">854</span></p>
+            </div>
+            <div class="myQuantity"> <!-- Updated class for styled input quantity -->
+                <label for="quantity">Quantity:</label> <!-- Added label for accessibility -->
+                <input type="number" id="quantity" min="0" max="stock6" value="0"> <!-- Added id for the input for label association -->
+            </div>
+        </div>
+    </div>
+
+    <div class="item-group hidden"  id="Perfume">
+        <div class="item" data-category="Perfume" data-stock="80">
+            <img src="Perfume-5.jpg" alt="Perfume">
+            <div>
+                <h2>Valentino</h2>
+                <p>Price: $29.00 | Stock: <span id="stock3">1023</span></p>
+            </div>
+            <div class="myQuantity"> <!-- Updated class for styled input quantity -->
+                <label for="quantity">Quantity:</label> <!-- Added label for accessibility -->
+                <input type="number" id="quantity" min="0" max="100" value="0"> <!-- Added id for the input for label association -->
+            </div>
+        </div>
+    </div>
+
+
+<!--SANDO-->
+<div class="item-group hidden" id="Sando">
+    <div class="item" data-category="Sando" data-stock="100">
+        <img src="Sando-1.jpg" alt="Sando">
+        <div>
+            <h2>Swavy Haven Tank Top Men White</h2>
+            <p>Price: $39.00 | Stock: <span id="stock1">92</span></p>
+        </div>
+        <div class="myQuantity"> <!-- Updated class for styled input quantity -->
+            <label for="quantity">Quantity:</label> <!-- Added label for accessibility -->
+            <input type="number" id="quantity" min="0" max="stock1" value="0"> <!-- Added id for the input for label association -->
+        </div>
+    </div>
+</div>
+
+<div class="item-group hidden" id="Sando">
+    <div class="item" data-category="Sando" data-stock="100">
+        <img src="Sando-2.jpg" alt="Sando">
+        <div>
+            <h2>Swavy Haven Tank Top Men Gray</h2>
+            <p>Price: $39.00 | Stock: <span id="stock2">213</span></p>
+        </div>
+        <div class="myQuantity"> <!-- Updated class for styled input quantity -->
+            <label for="quantity">Quantity:</label> <!-- Added label for accessibility -->
+            <input type="number" id="quantity" min="0" max="stock2" value="0"> <!-- Added id for the input for label association -->
+        </div>
+    </div>
+</div>>
+
+<div class="item-group hidden" id="Sando">
+    <div class="item" data-category="Sando" data-stock="100">
+        <img src="Sando-4.jpg" alt="Sando">
+        <div>
+            <h2>Swavy Haven Tank Top Men Black</h2>
+            <p>Price: $39.00 | Stock: <span id="stock3">103</span></p>
+        </div>
+        <div class="myQuantity"> <!-- Updated class for styled input quantity -->
+            <label for="quantity">Quantity:</label> <!-- Added label for accessibility -->
+            <input type="number" id="quantity" min="0" max="stock3" value="0"> <!-- Added id for the input for label association -->
+        </div>
+    </div>
+</div>
+
+<div class="item-group hidden" id="Sando">
+    <div class="item" data-category="Sando" data-stock="100">
+        <img src="Sando-Girl.jpg" alt="Sando">
+        <div>
+            <h2>Swavy Haven Tank Top Women White</h2>
+            <p>Price: $39.00 | Stock: <span id="stock4">93</span></p>
+        </div>
+        <div class="myQuantity"> <!-- Updated class for styled input quantity -->
+            <label for="quantity">Quantity:</label> <!-- Added label for accessibility -->
+            <input type="number" id="quantity" min="0" max="stock4" value="0"> <!-- Added id for the input for label association -->
+        </div>
+    </div>
+</div>
+
+<div class="item-group hidden" id="Sando">
+    <div class="item" data-category="Sando" data-stock="100">
+        <img src="Sando-Mabo.jpg" alt="Sando">
+        <div>
+            <h2>Swavy Haven Tank Top Women Mabo</h2>
+            <p>Price: $39.00 | Stock: <span id="stock1">149</span></p>
+        </div>
+        <div class="myQuantity"> <!-- Updated class for styled input quantity -->
+            <label for="quantity">Quantity:</label> <!-- Added label for accessibility -->
+            <input type="number" id="quantity" min="0" max="stock5" value="0"> <!-- Added id for the input for label association -->
+        </div>
+    </div>
+</div>
+   
+
+
+<!--TOYS-->
+<div class="item-group hidden" id="Toys">
+    <div class="item" data-category="Toys" data-stock="100">
+        <img src="Toy-1.jpg" alt="Toys">
+        <div>
+            <h2>Black Lamborghini 12V Exclusive for Kids</h2>
+            <p>Price: $239.00 | Stock: <span id="stock1">10</span></p>
+        </div>
+        <div class="myQuantity"> <!-- Updated class for styled input quantity -->
+            <label for="quantity">Quantity:</label> <!-- Added label for accessibility -->
+            <input type="number" id="quantity" min="0" max="stock1" value="0"> <!-- Added id for the input for label association -->
+        </div>
+    </div>
+</div>
+
+<div class="item-group hidden" id="Toys">
+    <div class="item" data-category="Toys" data-stock="100">
+        <img src="Toy-2.jpg" alt="Toys">
+        <div>
+            <h2>Red Lamborghini 12V Exclusive for Kids</h2>
+            <p>Price: $239.00 | Stock: <span id="stock2">13</span></p>
+        </div>
+        <div class="myQuantity"> <!-- Updated class for styled input quantity -->
+            <label for="quantity">Quantity:</label> <!-- Added label for accessibility -->
+            <input type="number" id="quantity" min="0" max="stock2" value="0"> <!-- Added id for the input for label association -->
+        </div>
+    </div>
+</div>
+
+<div class="item-group hidden" id="Toys">
+    <div class="item" data-category="Toys" data-stock="100">
+        <img src="Toy-3.jpg" alt="Toys">
+        <div>
+            <h2>Blue Lamborghini 12V Exclusive for Kids</h2>
+            <p>Price: $239.00 | Stock: <span id="stock3">15</span></p>
+        </div>
+        <div class="myQuantity"> <!-- Updated class for styled input quantity -->
+            <label for="quantity">Quantity:</label> <!-- Added label for accessibility -->
+            <input type="number" id="quantity" min="0" max="stock3" value="0"> <!-- Added id for the input for label association -->
+        </div>
+    </div>
+</div>
+
+
+<div class="item-group hidden" id="Toys">
+    <div class="item" data-category="Toys" data-stock="100">
+        <img src="Toy-4-Girl.jpg" alt="Toys">
+        <div>
+            <h2>Pink Porsche 6V Exclusive for Kids</h2>
+            <p>Price: $229.00 | Stock: <span id="stock4">12</span></p>
+        </div>
+        <div class="myQuantity"> <!-- Updated class for styled input quantity -->
+            <label for="quantity">Quantity:</label> <!-- Added label for accessibility -->
+            <input type="number" id="quantity" min="0" max="stock4" value="0"> <!-- Added id for the input for label association -->
+        </div>
+    </div>
+</div>
+
+
+<div class="item-group hidden" id="Toys">
+    <div class="item" data-category="Toys" data-stock="100">
+        <img src="Toy-5-Girl.jpg" alt="Toys">
+        <div>
+            <h2>Pink Lexus 8v Exclusive for Kids</h2>
+            <p>Price: $229.00 | Stock: <span id="stock5">15</span></p>
+        </div>
+        <div class="myQuantity"> <!-- Updated class for styled input quantity -->
+            <label for="quantity">Quantity:</label> <!-- Added label for accessibility -->
+            <input type="number" id="quantity" min="0" max="stock5" value="0"> <!-- Added id for the input for label association -->
+        </div>
+    </div>
+</div>
+
+
+<div class="space">
+        <div>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+        </div>
+    </div>   
+</div> 
+
+<footer>
+    <p id="total-text">Total: $<span id="total">0.00</span></p>
+    <button id="purchaseBtn" onclick="purchaseWithAlerts()">Purchase</button>
+    <button id="displayReceiptBtn" onclick="displayReceiptAlert()">Display Receipt</button>
+    <button id="cancelBtn" onclick ="cancelOrder()">Cancel Order</button>
+    <button id="navigateBtn" onclick = "navigateToDiscountPage()">Go to Discount Page</button>
+    <button id="navigateBtn" onclick = "navigateToMainPage()">Go to Main Page</button>
+</footer>
+
+<script>
+    const items = document.querySelectorAll('.item');
+
+    items.forEach(item => {
+        const input = item.querySelector('input');
+        const stockElement = item.querySelector('span');
+        const stock = parseInt(stockElement.textContent);
+        
+        input.addEventListener('change', () => {
+            let quantity = parseInt(input.value);
+            if (quantity < 0) {
+                quantity = 0;
+            } else if (quantity > stock) {
+                quantity = stock;
+            }
+            input.value = quantity;
+            updateTotal();
+        });
+    });
+
+
+    function purchaseWithAlerts() {
+    const items = document.querySelectorAll('.item');
+    let hasItems = false;
+    let isOutOfStock = false;
+
+    items.forEach((item, index) => {
+        const input = item.querySelector('input');
+        const quantity = parseInt(input.value);
+        const stockElement = item.querySelector('span');
+        let stock = parseInt(stockElement.textContent);
+
+        if (quantity > 0) {
+            hasItems = true;
+
+            if (stock === 0) {
+                alert('Out of stock for item ' + (index + 1));
+                isOutOfStock = true;
+                return;
+            }
+
+            if (quantity > stock) {
+                alert('Not enough stock available for item ' + (index + 1));
+                return;
+            }
+
+            stock -= quantity;
+            stockElement.textContent = stock;
+            input.value = 0;
+        }
+    });
+
+    if (!hasItems) {
+        alert('Kindly choose items for purchase');
+    } else {
+        updateTotal();
+        if (!isOutOfStock) {
+            alert('Thank you for shopping with us');
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+function updateTotal() {
+    const items = document.querySelectorAll('.item');
+    let total = 0;
+
+    items.forEach(item => {
+        const input = item.querySelector('input');
+        const quantity = parseInt(input.value);
+        const priceText = item.querySelector('p').textContent;
+        const priceMatch = priceText.match(/Price:\s*\$([\d.]+)/);
+        
+        if (priceMatch) {
+            const price = parseFloat(priceMatch[1]);
+            total += price * quantity;
+        }
+    });
+
+    document.getElementById('total').textContent = total.toFixed(2);
+}
+
+
+    function resetInputValues() {
+        const inputs = document.querySelectorAll('.item input');
+        inputs.forEach(input => {
+            input.value = 0;
+        });
+    }
+
+    function showCategory(category) {
+        const itemGroups = document.querySelectorAll('.item-group');
+        itemGroups.forEach(group => {
+            if (group.id === category) {
+                group.classList.remove('hidden');
+            } else {
+                group.classList.add('hidden');
+            }
+        });
+    }
+   
+    function displayReceiptAlert() {
+    let receipt = "Receipt:\n";
+    let total = 0;
+    const items = document.querySelectorAll('.item');
+    
+    items.forEach((item, index) => {
+        const input = item.querySelector('input');
+        const quantity = parseInt(input.value);
+        if (quantity > 0) {
+            const itemName = item.querySelector('h2').textContent;
+            const priceText = item.querySelector('p').textContent;
+            const priceMatch = priceText.match(/Price:\s*\$([\d.]+)/);
+            if (priceMatch) {
+                const price = parseFloat(priceMatch[1]);
+                const totalPrice = quantity * price;
+                receipt += `Item ${index + 1}: ${itemName} - Quantity: ${quantity} - Total Price: $${totalPrice.toFixed(2)}\n`;
+                total += totalPrice;
+            }
+        }
+    });
+
+    receipt += `Total: $${total.toFixed(2)}`;
+    alert(receipt);
+}
+
+
+    function cancelOrder() {
+    const items = document.querySelectorAll('.item');
+    let hasSelectedItem = false;
+
+    items.forEach(item => {
+        const input = item.querySelector('input');
+        const quantity = parseInt(input.value);
+        if (quantity > 0) {
+            hasSelectedItem = true;
+        }
+        input.value = 0;
+    });
+
+    if (!hasSelectedItem && event.target.id === "cancelBtn") {
+        alert("No cancellation required as no items were selected");
+    } else if (event.target.id === "cancelBtn") {
+        updateTotal();
+        alert('Cancellation confirmed');
+    }
+}
+
+function navigateToDiscountPage() {
+            // Replace 'path/to/your/page.html' with the actual path to your local file
+            window.location.href = 'DISCOUNT_PAGE.html';
+        }
+
+function navigateToMainPage() {
+            window.location.href = 'index.html';
+
+        }
+
+
+
+</script> 
+
+
+
+
+</body>
+</html>
